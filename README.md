@@ -208,6 +208,21 @@ This project is a starting point for a Flutter application.
 - Consider using CI/CD tools for automated testing and deployment.
 - Explore Flutter packages for additional functionality, such as state management, networking, and UI components.
 - Stay updated with Flutter's latest releases and best practices.
+- **Enable error monitoring**: The app uses Firebase Crashlytics for real-time error reporting. Ensure Firebase is configured for your project and monitor the Crashlytics dashboard for issues.
+- **Improve accessibility**: Key widgets, such as the code editor, are wrapped with `Semantics` for screen reader support. Review and expand accessibility coverage as needed.
+
+### **Error Monitoring**
+This project integrates [Firebase Crashlytics](https://firebase.google.com/products/crashlytics) for real-time error monitoring. All uncaught errors and Flutter errors are automatically reported. To enable:
+1. Set up Firebase for your app (see the [Firebase docs](https://firebase.google.com/docs/flutter/setup)).
+2. Ensure your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) are included in the respective platform folders.
+3. Monitor errors in the Firebase Crashlytics dashboard.
+
+### **Accessibility**
+Accessibility is a priority. The code editor and other interactive widgets use Flutter's `Semantics` widget to provide screen reader support. To further improve accessibility:
+- Add meaningful labels to all interactive widgets.
+- Test with screen readers on Android and iOS.
+- Follow [Flutter accessibility best practices](https://docs.flutter.dev/development/accessibility-and-localization/accessibility).
+
 ### **Contributing**
 Contributions are welcome! Please follow these steps:
 1. Fork the repository.
