@@ -3,7 +3,6 @@ import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart' as path;
 import '../../core/providers/ide_provider.dart';
-import '../../core/services/file_service.dart';
 import '../../core/performance/optimizations.dart';
 import 'editor_enhancements.dart';
 import 'advanced_features.dart';
