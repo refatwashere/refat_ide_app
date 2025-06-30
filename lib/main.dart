@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'core/services/service_integration.dart';
-// import 'core/providers/ide_provider.dart';
+import 'package:provider/provider.dart';
+import 'core/services/service_integration.dart';
+import 'core/providers/ide_provider.dart';
 import 'app.dart';
 import 'features/settings/settings_screen.dart';
 import 'features/extensions/extension_marketplace.dart';

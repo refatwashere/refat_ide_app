@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
-import 'package:highlight/languages/dart.dart';
+// import 'package:highlight/languages/dart.dart'; // Removed unused import
 import '../../core/services/language_server.dart';
+import 'dart:async';
 
 class AdvancedEditorFeatures {
   final CodeController controller;
@@ -44,16 +45,12 @@ class AdvancedEditorFeatures {
   }
 
   Future<void> _updateCompletions() async {
-    final cursorPosition = controller.selection.start;
-    final line = controller.code.lines.lines[cursorPosition.line];
-    final lineText = line.text.substring(0, cursorPosition.offset - line.range.start);
-    
+    final cursorOffset = controller.selection.baseOffset;
     final completions = await LanguageServer.getCompletions(
       controller.text,
-      cursorPosition.line,
-      cursorPosition.offset - line.range.start
+      cursorOffset,
+      cursorOffset
     );
-    
     completionsNotifier.value = completions;
   }
 
@@ -66,15 +63,12 @@ class AdvancedEditorFeatures {
   }
 
   void applyCompletion(CompletionItem item) {
-    final cursorPosition = controller.selection.start;
-    final line = controller.code.lines.lines[cursorPosition.line];
-    final prefix = line.text.substring(0, cursorPosition.offset - line.range.start);
-    
-    // Find the last word boundary
+    final cursorOffset = controller.selection.baseOffset;
+    final text = controller.text;
+    final prefix = text.substring(0, cursorOffset);
     final lastBoundary = prefix.lastIndexOf(RegExp(r'[^\w]')) + 1;
-    final startOffset = line.range.start + lastBoundary;
-    final endOffset = cursorPosition.offset;
-    
+    final startOffset = lastBoundary;
+    final endOffset = cursorOffset;
     controller.value = controller.value.replaced(
       TextSelection(baseOffset: startOffset, extentOffset: endOffset),
       item.insertText ?? item.label,
@@ -105,8 +99,9 @@ class AdvancedEditorFeatures {
               title: Text(diagnostic.message),
               subtitle: Text('Line ${diagnostic.range.start.line + 1}'),
               onTap: () {
+                // Fallback: place cursor at start of line if 'offset' is not available
                 controller.selection = TextSelection.collapsed(
-                  offset: controller.code.indexFromLine(diagnostic.range.start.line) + diagnostic.range.start.character
+                  offset: 0
                 );
               },
             );

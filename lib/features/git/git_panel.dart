@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../core/providers/ide_provider.dart';
+// import 'package:provider/provider.dart'; // Removed unused import
+// import '../../core/providers/ide_provider.dart'; // Removed unused import
 
 class GitPanel extends StatefulWidget {
   const GitPanel({super.key});
@@ -22,7 +22,7 @@ class _GitPanelState extends State<GitPanel> {
 
   @override
   Widget build(BuildContext context) {
-    final projectPath = context.watch<IDEProvider>().projectPath;
+    // final projectPath = context.watch<IDEProvider>().projectPath; // Removed unused variable
     
     return Column(
       children: [
