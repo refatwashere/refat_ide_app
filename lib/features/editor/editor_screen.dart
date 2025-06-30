@@ -77,43 +77,48 @@ class _EditorScreenState extends State<EditorScreen> {
     final ideProvider = context.watch<IDEProvider>();
     final editorSettings = ideProvider.editorSettings;
     
-    return Stack(
-      children: [
-        Column(
+    return Semantics(
+      label: 'Code editor',
+      child: ExcludeSemantics(
+        child: Stack(
           children: [
-            _buildTabBar(ideProvider),
-            Expanded(
-              child: CodeTheme(
-                data: CodeThemeData(styles: EditorEnhancements.getEditorTheme()),
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  child: TextField(
-                    focusNode: _focusNode,
-                    controller: _controller,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    style: TextStyle(
-                      fontSize: editorSettings['fontSize'].toDouble(),
-                      fontFamily: editorSettings['fontFamily'],
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(16),
+            Column(
+              children: [
+                _buildTabBar(ideProvider),
+                Expanded(
+                  child: CodeTheme(
+                    data: CodeThemeData(styles: EditorEnhancements.getEditorTheme()),
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      child: TextField(
+                        focusNode: _focusNode,
+                        controller: _controller,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: editorSettings['fontSize'].toDouble(),
+                          fontFamily: editorSettings['fontFamily'],
+                        ),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.all(16),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
+            if (_showCompletions && _advancedFeatures != null)
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: _advancedFeatures!.buildCompletionsPanel(),
+              ),
           ],
         ),
-        if (_showCompletions && _advancedFeatures != null)
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: _advancedFeatures!.buildCompletionsPanel(),
-          ),
-      ],
+      ),
     );
   }
 
