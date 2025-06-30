@@ -1,4 +1,5 @@
 {
     "cmake.sourceDirectory": "C:/Users/refat/Desktop/Dev Refat/refat_ide_app/windows",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cmake.cmakePath": "cmake"
 }
