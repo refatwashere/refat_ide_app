@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:refat_ide_app/main.dart'; // Adjust the import to your app's main file
+// Adjust the import to your app's main file
 
 // NOTE: This test requires the flutter_test package and must be run in a Flutter environment.
 
